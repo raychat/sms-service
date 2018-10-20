@@ -1,7 +1,7 @@
 # Sms Gateways
 Using this Node.js REST-ful API you'll be able to send SMS using multiple services.
 
-#Sms Gateways that supported in thsi Service
+# Sms Gateways that supported in this Service
 
 
 | Number  | website |
