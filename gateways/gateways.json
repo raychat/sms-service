@@ -3,7 +3,7 @@
 		"kavenegar": {
 			"name": "kavenegar",
 			"localName": "کاوه نگار",
-			"developer": "@SamanBaboli",
+			"developer": "@raychat",
 			"website": "http://kavenegar.com",
 			"logo": "/logos/kavenegar.png",
 			"country": "IR",
@@ -12,7 +12,7 @@
 		"sms_ir": {
 			"name": "sms_ir",
 			"localName": "ایده پردازان",
-			"developer": "@ali5991jalali",
+			"developer": "@raychat",
 			"website": "https://www.sms.ir/",
 			"logo": "/logos/smsir-logo.png",
 			"country": "IR",
@@ -21,7 +21,7 @@
 		"melipayamak": {
 			"name": "melipayamak",
 			"localName": "ملی پیامک",
-			"developer": "@ali5991jalali",
+			"developer": "@raychat",
 			"website": "https://www.melipayamak.com/",
 			"logo": "/logos/melipayamak.jpg",
 			"country": "IR",
