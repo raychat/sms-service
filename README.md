@@ -1,7 +1,7 @@
 # Sms Gateways
 Using this Node.js REST-ful API you'll be able to send SMS using multiple services.
 
-### list of sms panels that currently supported :
+### List of sms panels that currently supported :
 
 
 | Number  | website |
@@ -19,7 +19,7 @@ Add your web service information to ./gateways/gateways.json
 
 ```
 "YourWebserviceName" : {
-	    	 "name": "YourWebserviceName",
+	    	"name": "YourWebserviceName",
 	      	"localName" : "نام وب سرویس شما",
 	        "developer": "@yourGithubId",
 	        "website": "http://domain.com",
