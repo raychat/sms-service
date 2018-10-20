@@ -13,7 +13,6 @@ const axios = require('axios')
 const get_token = (api_key, security_code) => {
 
     return new Promise((resolve, reject) => {
-
         axios({
                 method: 'post',
                 url: 'http://RestfulSms.com/api/Token',
@@ -47,7 +46,6 @@ const get_token = (api_key, security_code) => {
 
 const send = (messages, numbers, token, sender) => {
     return new Promise((resolve, reject) => {
-
         axios({
                 method: 'post',
                 url: 'http://RestfulSms.com/api/MessageSend',
@@ -105,7 +103,6 @@ const sendSms = async (auth, messages, sender, numbers, callback) => {
 
 
 const getInfo = async (auth, callback) => {
-
     let api_key = auth['api_key'];
     let security_code = auth['security_code'];
     let token = await get_token(api_key, security_code);
@@ -126,7 +123,6 @@ const getInfo = async (auth, callback) => {
             }
         })
         .catch(err => {
-
             callback('Error in getting and passing data')
         })
 }

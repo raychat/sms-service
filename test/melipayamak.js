@@ -2,7 +2,7 @@ const chai = require('chai');
 const request = require('request');
 const expect = chai.expect;
 
-
+// config
 let username = 'YOUR USERNAME';
 let password = 'YOUR PASSWORD';
 let message = 'salam test melipayamak';
@@ -14,14 +14,9 @@ let auth = {
     password
 }
 
-
-
 describe('TEST MELLI PAYAMAK SERVICE', () => {
-
     it('test sending sms', (done) => {
-
         request.post({
-
             url: 'http://localhost:3000/sendSms',
             form: {
                 auth,
@@ -31,14 +26,10 @@ describe('TEST MELLI PAYAMAK SERVICE', () => {
                 gateway
             }
         }, (err, res, body) => {
-
             if(err){
-
                 throw Error('eroor')
                 done()
-
             }else{
-
                 expect((JSON.parse(body))['status']).have.to.equal(1);
                 done()
             }            
@@ -47,21 +38,16 @@ describe('TEST MELLI PAYAMAK SERVICE', () => {
 
 
     it('test get sms info',(done)=>{
-
         request.post({
-
             url: 'http://localhost:3000/getInfo',
             form: {
                 auth,
                 gateway
             }
         }, (err, res, body) => {
-            
             if(err){
-
                 throw Error('eroor')
                 done()
-
             }else{
                 expect((JSON.parse(body))['status']).have.to.equal(1);
                 done()

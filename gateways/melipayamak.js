@@ -14,9 +14,9 @@ const request = require('request')
   @param {function} callback
 **/
 const getInfo = (auth, callback) => {
-
     let username = auth.username;
     let password = auth.password;
+
     axios({
             method: 'post',
             url: 'https://rest.payamak-panel.com/api/SendSMS/GetCredit',
@@ -49,10 +49,9 @@ const getInfo = (auth, callback) => {
 **/
 
 const sendSms = (auth, message, sender, receptor, callback) => {
-
     let username = auth.username;
     let password = auth.password;
-
+    
     axios({
             method: 'post',
             url: 'https://rest.payamak-panel.com/api/SendSMS/SendSMS',

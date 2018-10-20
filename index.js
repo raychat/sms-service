@@ -39,9 +39,7 @@ app.post('/sendSms', (req, res) => {
         return
     }
 
-
     //TODO check gateway is exsist or not
-
     require(`./gateways/${gateway}`).sendSms(auth, message, sender, receptor, (result) => {
         if (result) {
             // if result is success

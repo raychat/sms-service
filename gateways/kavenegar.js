@@ -1,6 +1,6 @@
 /**
-	Kavenegar sms gateway
-	Author : Raychat
+    Kavenegar sms gateway
+    Author : Raychat
 **/
 
 // for make http or https requests
@@ -15,24 +15,23 @@ const request = require('request')
 **/
 
 module.exports.sendSms = (auth, message, sender, receptor, callback) => {
-    request.post({
-        url: `https://api.kavenegar.com/v1/${auth}/sms/send.json`,
-        form: {
-            receptor: receptor, // required
-            message: message, // required
-            sender: sender
-        }
-    }, function (err, httpResponse, body) {
-        if (!err) {
-            body = JSON.parse(body)
-            body.status = 200
-            callback({ status: 200, result: 'successfully sent message' })
-        } else {
-            callback('Error in getting and passing data')
-        }
-    })
-},
-
+        request.post({
+            url: `https://api.kavenegar.com/v1/${auth}/sms/send.json`,
+            form: {
+                receptor: receptor, // required
+                message: message, // required
+                sender: sender
+            }
+        }, function(err, httpResponse, body) {
+            if (!err) {
+                body = JSON.parse(body)
+                body.status = 200
+                callback({ status: 200, result: 'successfully sent message' })
+            } else {
+                callback('Error in getting and passing data')
+            }
+        })
+    },
 
     /** 
       @param {string} apikey
@@ -41,7 +40,7 @@ module.exports.sendSms = (auth, message, sender, receptor, callback) => {
     module.exports.getInfo = (apikey, callback) => {
         request.post({
             url: `https://api.kavenegar.com/v1/${apikey}/account/info.json`,
-        }, function (err, httpResponse, body) {
+        }, function(err, httpResponse, body) {
             if (!err) {
 
                 body = JSON.parse(body)
