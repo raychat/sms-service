@@ -26,15 +26,7 @@
 			"logo": "/logos/melipayamak.jpg",
 			"country": "IR",
 			"AuthType": 2
-		},
-		"smsmelli": {
-			"name": "smsmelli",
-			"localName": "اس ام اس ملی",
-			"developer": "@raychat",
-			"website": "http://www.smsmelli.ir",
-			"logo": "/logos/smsmelli.png",
-			"country": "IR",
-			"AuthType": 2
 		}
 	}
 }
+

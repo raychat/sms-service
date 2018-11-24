@@ -14,6 +14,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(express.static('assets'))
 
+/**
+ * call check gateways method
+ */
+const checkGateWay = require('./checkGateWays');
+
 
 /** 
   @param {string || object} auth
@@ -38,6 +43,14 @@ app.post('/sendSms', (req, res) => {
         })
         return
     }
+
+    //check being gateway in this application list
+    if (checkGateWay(gateway) === false) {
+        res.send({ status: -5, msg: 'there is no gateway like you entered' })
+        return
+    }
+
+
 
     //TODO check gateway is exsist or not
     require(`./gateways/${gateway}`).sendSms(auth, message, sender, receptor, (result) => {
@@ -68,9 +81,16 @@ app.post('/getInfo', (req, res) => {
         gateway // required
     } = req.body
 
-    if (!auth) {
+    if (!auth && !gateway) {
         res.send({ status: -1, msg: "please send all required fields" })
     }
+
+    //check being gateway in this application list
+    if (checkGateWay(gateway) === false) {
+        res.send({ status: -5, msg: 'there is no gateway like you entered' })
+        return
+    }
+
     require(`./gateways/${gateway}`).getInfo(auth, (result) => {
         if (result) {
             // if result is success
