@@ -15,7 +15,7 @@ Using this Node.js REST-ful API you'll be able to send SMS using multiple servic
 
 ### Add your web service:
 
-Add your web service information to ./gateways/gateways.json
+Add your web service info to ./gateways/gateways.json
 
 ```
 "YourWebserviceName" : {
@@ -28,7 +28,7 @@ Add your web service information to ./gateways/gateways.json
 	        "AuthType" : 1 
     	} 
 ```
-Some of web services just need a token to authorize and some of them need username and password, you can specify Auth type with this numbers:
+Some web services only requires token to authorize and some of them requires username and password, you can specify Auth type using this numbers:
 
 | Number  | Type |
 | ------------- | ------------- |
@@ -36,13 +36,13 @@ Some of web services just need a token to authorize and some of them need userna
 | 2  | User Pass  |
 | 3  | Other  |
 
-You can check this types in your client and ask user for token or user pass.
+You can check this types in your client and ask user to register token or username & password.
 
-After that:
+After that
 
-Add YourWebserviceName.js to './gateways' - it name must be that name what you added to gateways.json file:
+Add YourWebserviceName.js to './gateways' - its name must be that name what you added to gateways.json file:
 
- And use ./gateways/sample js for writing your codes.
+And use ./gateways/sample js for writing your codes.
  
  ## How to use?
  
