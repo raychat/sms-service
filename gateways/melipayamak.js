@@ -51,8 +51,11 @@ const getInfo = (auth, callback) => {
 const sendSms = (auth, message, sender, receptor, callback) => {
     let username = auth.username;
     let password = auth.password;
-    
-    axios({
+
+    if(sender=='false'){
+        callback('you have to send sender phone number for this service...' )
+    }else{
+        axios({
             method: 'post',
             url: 'https://rest.payamak-panel.com/api/SendSMS/SendSMS',
             data: {
@@ -75,6 +78,7 @@ const sendSms = (auth, message, sender, receptor, callback) => {
         .catch(err => {
             callback('Error in getting and passing data')
         })
+    }
 }
 
 module.exports = {
