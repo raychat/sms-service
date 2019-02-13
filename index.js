@@ -21,14 +21,17 @@ const checkGateWay = require('./checkGateWays');
 
 
 /** 
-  @param {string || object} auth
+  @param {object} auth
   @param {string} message
   @param {string} sender
   @param {string} receptor
   @param {string} gateway
 **/
 app.post('/sendSms', (req, res) => {
-    const {
+
+    console.log(req.body);
+    
+    let {
         auth, // required
         message, // required
         sender, // optional
@@ -50,13 +53,17 @@ app.post('/sendSms', (req, res) => {
         return
     }
 
-
+    if(!sender){
+        sender='false'
+    }
 
     //TODO check gateway is exsist or not
     require(`./gateways/${gateway}`).sendSms(auth, message, sender, receptor, (result) => {
         if (result) {
+            console.log(result)
             // if result is success
             if (result.status) {
+                
                 if (result.status === 200) {
                     res.send({ "status": 1, "msg": result, "success": true })
                 } else {

@@ -14,14 +14,14 @@ const get_token = (api_key, security_code) => {
 
     return new Promise((resolve, reject) => {
         axios({
-                method: 'post',
-                url: 'http://RestfulSms.com/api/Token',
-                data: {
-                    "UserApiKey": api_key,
-                    "SecretKey": security_code
-                },
-                headers: { 'Content-Type': 'application/json' }
-            })
+            method: 'post',
+            url: 'http://RestfulSms.com/api/Token',
+            data: {
+                "UserApiKey": api_key,
+                "SecretKey": security_code
+            },
+            headers: { 'Content-Type': 'application/json' }
+        })
             .then((result) => {
 
                 if (result.data['IsSuccessful']) {
@@ -31,7 +31,8 @@ const get_token = (api_key, security_code) => {
                 }
             })
             .catch((error) => {
-                reject('Error in getting or passing data')
+                console.log(error)
+                reject('Error in getting or passing dataaa')
             })
     })
 }
@@ -47,17 +48,17 @@ const get_token = (api_key, security_code) => {
 const send = (messages, numbers, token, sender) => {
     return new Promise((resolve, reject) => {
         axios({
-                method: 'post',
-                url: 'http://RestfulSms.com/api/MessageSend',
-                data: {
-                    "Messages": messages,
-                    "MobileNumbers": numbers,
-                    "LineNumber": sender,
-                    "SendDateTime": "",
-                    "CanContinueInCaseOfError": "false",
-                },
-                headers: { 'Content-Type': 'application/json', 'x-sms-ir-secure-token': token }
-            })
+            method: 'post',
+            url: 'http://RestfulSms.com/api/MessageSend',
+            data: {
+                "Messages": messages,
+                "MobileNumbers": numbers,
+                "LineNumber": sender,
+                "SendDateTime": "",
+                "CanContinueInCaseOfError": "false",
+            },
+            headers: { 'Content-Type': 'application/json', 'x-sms-ir-secure-token': token }
+        })
             .then((result) => {
                 if (result.data['IsSuccessful']) {
                     resolve(result.data['Message'])
@@ -66,6 +67,7 @@ const send = (messages, numbers, token, sender) => {
                 }
             })
             .catch((error) => {
+                console.log(error)
                 reject('Error in getting or passing Token')
             })
     })
@@ -86,21 +88,25 @@ const sendSms = async (auth, messages, sender, numbers, callback) => {
     let api_key = auth['api_key'];
     let security_code = auth['security_code']
 
-    try {
-        let token = await get_token(api_key, security_code);
-        let sent_result = await send(messages, numbers, token, sender);
-        callback({ result: 'successfully sent message', status: 200 });
-    } catch (error) {
-        callback('Error in getting and passing data')
+    if (sender == 'false') {
+        callback('you have to send sender number for this service...')
+    } else {
+        try {
+            let token = await get_token(api_key, security_code);
+            let sent_result = await send(messages, numbers, token, sender);
+            callback({ result: 'successfully sent message', status: 200 });
+        } catch (error) {
+            console.log(error)
+            callback('Error in getting and passing data')
+        }
     }
 }
+
 
 /** 
    @param {object} auth
    @param {function} callback
  **/
-
-
 
 const getInfo = async (auth, callback) => {
     let api_key = auth['api_key'];
@@ -108,10 +114,10 @@ const getInfo = async (auth, callback) => {
     let token = await get_token(api_key, security_code);
 
     axios({
-            method: 'get',
-            url: 'http://RestfulSms.com/api/credit',
-            headers: { 'x-sms-ir-secure-token': token }
-        })
+        method: 'get',
+        url: 'http://RestfulSms.com/api/credit',
+        headers: { 'x-sms-ir-secure-token': token }
+    })
         .then(result => {
             return result.data
         })

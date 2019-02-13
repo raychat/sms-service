@@ -7,7 +7,7 @@
 const request = require('request')
 
 /** 
-  @param {string} auth
+  @param {object} auth
   @param {string} message
   @param {string} sender
   @param {string} receptor
@@ -15,32 +15,45 @@ const request = require('request')
 **/
 
 module.exports.sendSms = (auth, message, sender, receptor, callback) => {
-        request.post({
-            url: `https://api.kavenegar.com/v1/${auth}/sms/send.json`,
-            form: {
-                receptor: receptor, // required
-                message: message, // required
-                sender: sender
-            }
-        }, function(err, httpResponse, body) {
-            if (!err) {
-                body = JSON.parse(body)
-                body.status = 200
-                callback({ status: 200, result: 'successfully sent message' })
-            } else {
-                callback('Error in getting and passing data')
-            }
-        })
-    },
+
+    let sendingData = {
+        receptor: receptor, // required
+        message: message // required        
+    }
+
+    let { token } = auth
+
+    if (sender != 'false') {
+        sendingData['sender'] = sender
+    }
+
+    console.log('sending data', sendingData)
+
+    request.post({
+        url: `https://api.kavenegar.com/v1/${token}/sms/send.json`,
+        form: sendingData
+    }, function (err, httpResponse, body) {
+        if (!err) {
+            body = JSON.parse(body)
+            body.status = 200
+            callback({ status: 200, result: 'successfully sent message' })
+        } else {
+            callback('Error in getting and passing data')
+        }
+    })
+},
 
     /** 
       @param {string} apikey
       @param {function} callback
     **/
-    module.exports.getInfo = (apikey, callback) => {
+    module.exports.getInfo = (auth, callback) => {
+
+        let { token } = auth
+
         request.post({
-            url: `https://api.kavenegar.com/v1/${apikey}/account/info.json`,
-        }, function(err, httpResponse, body) {
+            url: `https://api.kavenegar.com/v1/${token}/account/info.json`,
+        }, function (err, httpResponse, body) {
             if (!err) {
 
                 body = JSON.parse(body)

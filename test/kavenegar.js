@@ -3,10 +3,10 @@ const request = require('request');
 const expect = chai.expect;
 
 // config
-const auth = 'YOR AUTH';
+const token = 'YOR Token';
 const gateway = 'kavenegar';
 let message = 'salam test kavanegar';
-let sender = '';
+let sender = 'sender Number';
 let receptor = 'YOUR TEST NUMBER';
 
 describe('TEST KAVENEGAR SMS SERVICE', () => {
@@ -14,7 +14,9 @@ describe('TEST KAVENEGAR SMS SERVICE', () => {
         request.post({
             url: 'http://localhost:3000/getInfo',
             form: {
-                auth,
+                auth: {
+                    token: token
+                },
                 gateway
             }
         }, (err, res, body) => {
@@ -33,7 +35,9 @@ describe('TEST KAVENEGAR SMS SERVICE', () => {
         request.post({
             url: 'http://localhost:3000/sendSms',
             form: {
-                auth,
+                auth: {
+                    token: token
+                },
                 gateway,
                 message,
                 sender,
